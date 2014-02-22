@@ -14,9 +14,20 @@ public class Piece extends Bug
   
   public boolean inDanger()
   {
+    boolean output = false;
     for(int i = 0; i < neighbors.size() - 1; i++)
-    {
-      if(Location.getDirectionToward(neighbors.get(i)) + 180
+    {   
+      Location playerPieceLoc = neighbors.get(i).getLocation();
+      int oppositeDirection = loc.getDirectionToward(playerPieceLoc) + 180;
+      if(oppositeDirection >= 360)
+      {
+        oppositeDirection = oppositeDirection - 360;
+      }
+      Location oppositeDirectionLocation = loc.getAdjacentLocation(oppositeDirection);
+
+      if(getGrid().get(oppositeDirectionLocation) == null)
+        output = true;      
     }
+    return output;
   }
 }

@@ -6,15 +6,34 @@
  * Piece(type, value, coordinate, danger, potential moves)
  * 
  * */
-public class CleverNameCheckAI
+
+import info.gridworld.grid.Grid;
+import info.gridworld.actor.Actor;
+import info.gridworld.actor.Bug;
+import java.util.ArrayList;
+import info.gridworld.grid.Location;
+
+public class CleverNameCheckAI extends Bug
 {
-  public boolean inDanger()
+  public ArrayList choosePiece()
   {
-     return true;
+    ArrayList<Location> possibleMoveActors = new ArrayList<Location>();
+    possibleMoveActors = getGrid().getOccupiedLocations();
+    for(int i = 0; i < possibleMoveActors.size() - 1; i++)
+    {
+      if(possibleMoveActors.get(i) instanceof WhiteKing || possibleMoveActors.get(i) instanceof WhitePiece)
+      {
+        possibleMoveActors.remove(i);
+      }
+      if(possibleMoveActors.get(i).inDanger() == false)
+      {
+        possibleMoveActors.remove(i);
+      }
+    }
+    return possibleMoveActors.get((int)((Math.random()*possibleMoveActors.size())));
   }
-//  
-//  public getPieces()
-//  {
-//    return getOccupiedLocations();
-//  }
+  
+  public void act()
+  {  
+  }
 }

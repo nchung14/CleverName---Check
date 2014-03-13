@@ -1,4 +1,4 @@
-// Nolan Chungs
+// Nolan Chung
 // AI to play chess on Jaz's CleverName-Check
 
 import info.gridworld.grid.Grid;
